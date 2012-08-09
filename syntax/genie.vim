@@ -31,46 +31,6 @@
 "
 " Option names:
 "
-"    For highlight builtin functions and objects:
-"       python_highlight_builtins
-"
-"    For highlight builtin objects:
-"       python_highlight_builtin_objs
-"
-"    For highlight builtin funtions:
-"       python_highlight_builtin_funcs
-"
-"    For highlight standard exceptions:
-"       python_highlight_exceptions
-"
-"    For highlight string formatting:
-"       python_highlight_string_formatting
-"
-"    For highlight str.format syntax:
-"       python_highlight_string_format
-"
-"    For highlight string.Template syntax:
-"       python_highlight_string_templates
-"
-"    For highlight indentation errors:
-"       python_highlight_indent_errors
-"
-"    For highlight trailing spaces:
-"       python_highlight_space_errors
-"
-"    For highlight doc-tests:
-"       python_highlight_doctests
-"
-"    If you want all Python highlightings above:
-"       python_highlight_all
-"    (This option not override previously set options)
-"
-"    For fast machines:
-"       python_slow_sync
-"
-"    For "print" builtin as function:
-"       python_print_as_function
-
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
 if version < 600
@@ -113,23 +73,21 @@ if exists("python_highlight_all") && python_highlight_all != 0
 endif
 
 " Keywords
-syn keyword pythonStatement	break continue del
-syn keyword pythonStatement	exec return
-syn keyword pythonStatement	pass raise
-syn keyword pythonStatement	global assert
-syn keyword pythonStatement	lambda yield
-syn keyword pythonStatement	with
-syn keyword pythonStatement	def class nextgroup=pythonFunction skipwhite
-syn match   pythonFunction	"[a-zA-Z_][a-zA-Z0-9_]*" display contained
-syn keyword pythonRepeat	for while
-syn keyword pythonConditional	if elif else
-syn keyword pythonPreCondit	import from as
+syn keyword	genieStatement	break continue
+syn keyword	genieStatement	exec return
+syn keyword	genieStatement	pass raise
+syn keyword	genieStatement	global assert
+syn keyword	genieStatement	lambda yield
+syn keyword	genieStatement	with print new of weak delete
+syn keyword	genieStatement	def var
+syn keyword	genieStatement	prop static
+syn keyword	genieStatement	init final class nextgroup=genieFunction skipwhite
+syn match	genieFunction	"[a-zA-Z_][a-zA-Z0-9_]*" display contained
+syn keyword genieRepeat	for while do
+syn keyword genieConditional	if else case when default
+syn keyword geniePreCondit	uses
 syn keyword pythonException	try except finally
-syn keyword pythonOperator	and in is not or
-
-if !exists("python_print_as_function") || python_print_as_function == 0
-  syn keyword pythonStatement print
-endif
+syn keyword genieOperator	and in is not or isa
 
 " Decorators (new in Python 2.4)
 syn match   pythonDecorator	"@" display nextgroup=pythonDottedName skipwhite
@@ -137,7 +95,7 @@ syn match   pythonDottedName "[a-zA-Z_][a-zA-Z0-9_]*\(\.[a-zA-Z_][a-zA-Z0-9_]*\)
 syn match   pythonDot        "\." display containedin=pythonDottedName
 
 " Comments
-syn match   pythonComment	"#.*$" display contains=pythonTodo,@Spell
+syn match   pythonComment	"//.*$" display contains=pythonTodo,@Spell
 syn match   pythonRun		"\%^#!.*$"
 syn match   pythonCoding	"\%^.*\(\n.*\)\?#.*coding[:=]\s*[0-9A-Za-z-_.]\+.*$"
 syn keyword pythonTodo		TODO FIXME XXX contained
@@ -245,8 +203,8 @@ syn match   pythonBinError	"\<0[bB][01]*[2-9]\d*[lL]\=\>" display
 
 if exists("python_highlight_builtin_objs") && python_highlight_builtin_objs != 0
   " Builtin objects and types
-  syn keyword pythonBuiltinObj	True False Ellipsis None NotImplemented
-  syn keyword pythonBuiltinObj	__debug__ __doc__ __file__ __name__ __package__
+  syn keyword pythonBuiltinObj	true talse int uint char uchar float double bool
+  syn keyword pythonBuiltinObj	unichar string object dict
 endif
 
 if exists("python_highlight_builtin_funcs") && python_highlight_builtin_funcs != 0
@@ -254,10 +212,10 @@ if exists("python_highlight_builtin_funcs") && python_highlight_builtin_funcs !=
   syn keyword pythonBuiltinFunc	__import__ abs all any apply
   syn keyword pythonBuiltinFunc	basestring bin bool buffer bytearray bytes callable
   syn keyword pythonBuiltinFunc	chr classmethod cmp coerce compile complex
-  syn keyword pythonBuiltinFunc	delattr dict dir divmod enumerate eval
+  syn keyword pythonBuiltinFunc	delattr dir divmod enumerate eval
   syn keyword pythonBuiltinFunc	execfile file filter float format frozenset getattr
   syn keyword pythonBuiltinFunc	globals hasattr hash help hex id
-  syn keyword pythonBuiltinFunc	input int intern isinstance
+  syn keyword pythonBuiltinFunc	input intern isinstance
   syn keyword pythonBuiltinFunc	issubclass iter len list locals long map max
   syn keyword pythonBuiltinFunc	min next object oct open ord
   syn keyword pythonBuiltinFunc	pow property range
@@ -314,13 +272,13 @@ if version >= 508 || !exists("did_python_syn_inits")
     command -nargs=+ HiLink hi def link <args>
   endif
 
-  HiLink pythonStatement	Statement
-  HiLink pythonPreCondit	Statement
-  HiLink pythonFunction		Function
-  HiLink pythonConditional	Conditional
-  HiLink pythonRepeat		Repeat
+  HiLink genieStatement	Statement
+  HiLink geniePreCondit	Statement
+  HiLink genieFunction		Function
+  HiLink genieConditional	Conditional
+  HiLink genieRepeat		Repeat
   HiLink pythonException	Exception
-  HiLink pythonOperator		Operator
+  HiLink genieOperator		Operator
 
   HiLink pythonDecorator	Define
   HiLink pythonDottedName	Function
