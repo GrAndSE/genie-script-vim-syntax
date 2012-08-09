@@ -1,0 +1,5 @@
+vim editor syntax file for Genie script language (https://live.gnome.org/Genie)
+
+Now is just a fork of python.vim with small adopations to genie statements,
+built in objects and functions. Requires a lot of changes but still better than
+nothing :)
